@@ -84,6 +84,9 @@ func _get_column_from_mouse(pos):
 	return int(local_x / TILE_SIZE)
 
 func _attempt_move(col):
+	if input_locked:
+		return
+		
 	if board[col][0] != 0:
 		return # Column full
 	
@@ -97,15 +100,43 @@ func _drop_token(col):
 			break
 	
 	if row != -1:
-		_place_token(col, row)
+		_animate_token_fall(col, row)
 
-func _place_token(col, row):
-	board[col][row] = current_player
+func _animate_token_fall(col, row):
+	# Lock input during animation
+	input_locked = true
 	
+	# Create token visual
 	var token = Sprite2D.new()
 	token.texture = red_token_texture if current_player == 1 else yellow_token_texture
-	token.position = BOARD_OFFSET + Vector2(col * TILE_SIZE + TILE_SIZE/2, row * TILE_SIZE + TILE_SIZE/2)
+	
+	# Start position (above the board at the correct column)
+	var start_pos = BOARD_OFFSET + Vector2(col * TILE_SIZE + TILE_SIZE/2, -TILE_SIZE)
+	# Target position
+	var end_pos = BOARD_OFFSET + Vector2(col * TILE_SIZE + TILE_SIZE/2, row * TILE_SIZE + TILE_SIZE/2)
+	
+	token.position = start_pos
+	# Add behind the board (z-index wise), but we already handle this by scene tree order?
+	# In Main.tscn: Background -> Tokens -> Board. So adding to Tokens node puts it behind Board.
 	tokens_container.add_child(token)
+	
+	# Animate
+	var tween = create_tween()
+	tween.set_trans(Tween.TRANS_BOUNCE) # Bounce effect for impact feel
+	tween.set_ease(Tween.EASE_OUT)
+	# Duration depends on how far it falls
+	var distance_ratio = (row + 1) / float(ROWS)
+	var duration = 0.4 + (0.1 * distance_ratio) 
+	
+	tween.tween_property(token, "position", end_pos, duration)
+	tween.tween_callback(func(): _on_token_landed(col, row))
+
+func _on_token_landed(col, row):
+	# Play sound
+	AudioManager.play_hit_sound()
+	
+	# Logic update
+	board[col][row] = current_player
 	
 	if _check_win(col, row):
 		_end_game(current_player)
@@ -115,10 +146,15 @@ func _place_token(col, row):
 		
 		# If PVE mode and it's now player 2's turn, trigger CPU
 		if Global.current_mode == Global.GameMode.PVE and current_player == 2 and not game_over:
-			input_locked = true
+			# input_locked is ALREADY true, so we keep it true for CPU
 			# Small delay for better feel
-			await get_tree().create_timer(0.5).timeout
+			await get_tree().create_timer(0.3).timeout
 			_cpu_move()
+		else:
+			# Unlock input for player
+			input_locked = false
+
+# Removed old _place_token and integrated into _animate_token_fall -> _on_token_landed sequence
 
 func _cpu_move():
 	# Simple AI: 

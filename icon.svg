@@ -1,5 +1,27 @@
-<svg width="64" height="64" xmlns="http://www.w3.org/2000/svg">
- <rect width="64" height="64" fill="#4B692F"/>
- <circle cx="32" cy="32" r="28" fill="#3B3B3B"/>
- <rect x="16" y="16" width="32" height="32" fill="#FFFFFF"/>
+<svg width="128" height="128" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer Outline (Darkest) -->
+  <path d="M40,20 H88 V40 H108 V60 H120 V88 H108 V108 H88 V120 H40 V108 H20 V88 H8 V60 H20 V40 H40 Z" fill="#7f0000"/>
+  
+  <!-- Main Body (Red) -->
+  <path d="M40,24 H88 V40 H104 V60 H116 V88 H104 V104 H88 V116 H40 V104 H24 V88 H12 V60 H24 V40 H40 Z" fill="#d32f2f"/>
+  
+  <!-- Inner Rim Highlight (Light Red) -->
+  <path d="M44,28 H84 V44 H100 V60 H112 V88 H100 V84 H84 V100 H44 V84 H28 V60 H16 V44 H28 V28 Z" fill="#ef5350"/>
+
+  <!-- Center Depression (Darker Red) -->
+  <path d="M52,52 H76 V76 H52 Z" fill="#b71c1c"/>
+  
+  <!-- "4" in pixels (White/Gold) -->
+  <!-- 
+    x x .
+    x x .
+    x x x 
+    . x .
+    . x .
+   -->
+   <!-- Scaling up a small 3x5 font to fit center -->
+   <!-- Let's just make a simple pixel sheen instead of text to be generic but clearer -->
+   <rect x="36" y="36" width="12" height="12" fill="white" fill-opacity="0.6"/>
+   <rect x="48" y="28" width="12" height="8" fill="white" fill-opacity="0.6"/>
+
 </svg>
