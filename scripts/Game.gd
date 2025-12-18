@@ -1,0 +1,166 @@
+extends Node2D
+
+const ROWS = 6
+const COLS = 7
+const TILE_SIZE = 64
+const BOARD_OFFSET = Vector2(100, 100)
+
+var board = []
+var current_player = 1 # 1: Red (Player), 2: Yellow (CPU/Player 2)
+var game_over = false
+var input_locked = false # To prevent input during CPU turn
+
+@onready var board_sprite = $BoardSprite
+@onready var tokens_container = $Tokens
+@onready var turn_label = $UI/TurnLabel
+
+var red_token_texture = preload("res://assets/token_red.svg")
+var yellow_token_texture = preload("res://assets/token_yellow.svg")
+var pixel_font = preload("res://assets/fonts/PressStart2P-Regular.ttf")
+
+func _ready():
+	_init_board()
+	_update_turn_label()
+	
+	# Apply font to UI
+	turn_label.add_theme_font_override("font", pixel_font)
+	turn_label.add_theme_font_size_override("font_size", 24)
+	
+	var back_btn = Button.new()
+	back_btn.text = "MENU"
+	back_btn.position = Vector2(550, 20)
+	back_btn.add_theme_font_override("font", pixel_font)
+	back_btn.add_theme_font_size_override("font_size", 16)
+	back_btn.pressed.connect(_on_back_pressed)
+	$UI.add_child(back_btn)
+
+func _init_board():
+	board = []
+	for x in range(COLS):
+		board.append([])
+		for y in range(ROWS):
+			board[x].append(0)
+
+func _input(event):
+	if game_over:
+		if event.is_action_pressed("ui_accept") or (event is InputEventMouseButton and event.pressed):
+			_reset_game()
+		return
+	
+	if input_locked:
+		return
+
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		var col = _get_column_from_mouse(event.position)
+		if col != -1:
+			_attempt_move(col)
+
+func _get_column_from_mouse(pos):
+	var local_x = pos.x - BOARD_OFFSET.x
+	if local_x < 0 or local_x >= COLS * TILE_SIZE:
+		return -1
+	return int(local_x / TILE_SIZE)
+
+func _attempt_move(col):
+	if board[col][0] != 0:
+		return # Column full
+	
+	_drop_token(col)
+
+func _drop_token(col):
+	var row = -1
+	for y in range(ROWS - 1, -1, -1):
+		if board[col][y] == 0:
+			row = y
+			break
+	
+	if row != -1:
+		_place_token(col, row)
+
+func _place_token(col, row):
+	board[col][row] = current_player
+	
+	var token = Sprite2D.new()
+	token.texture = red_token_texture if current_player == 1 else yellow_token_texture
+	token.position = BOARD_OFFSET + Vector2(col * TILE_SIZE + TILE_SIZE/2, row * TILE_SIZE + TILE_SIZE/2)
+	tokens_container.add_child(token)
+	
+	if _check_win(col, row):
+		_end_game(current_player)
+	else:
+		current_player = 3 - current_player
+		_update_turn_label()
+		
+		# If PVE mode and it's now player 2's turn, trigger CPU
+		if Global.current_mode == Global.GameMode.PVE and current_player == 2 and not game_over:
+			input_locked = true
+			# Small delay for better feel
+			await get_tree().create_timer(0.5).timeout
+			_cpu_move()
+
+func _cpu_move():
+	# Simple AI: 
+	# 1. Check if can win
+	# 2. Check if need to block
+	# 3. Random valid move
+	
+	var move_col = -1
+	
+	# 1. Try to win (Naive check for now, just random for simplicity in this step, can be improved)
+	# For now, let's just do random valid column to ensure it works, then improve if asked.
+	var valid_cols = []
+	for i in range(COLS):
+		if board[i][0] == 0:
+			valid_cols.append(i)
+	
+	if valid_cols.size() > 0:
+		move_col = valid_cols.pick_random()
+	
+	if move_col != -1:
+		_drop_token(move_col)
+	
+	input_locked = false
+
+func _check_win(col, row):
+	var player = board[col][row]
+	var directions = [Vector2(1, 0), Vector2(0, 1), Vector2(1, 1), Vector2(1, -1)]
+	
+	for d in directions:
+		var count = 1
+		for i in range(1, 4):
+			var c = col + d.x * i
+			var r = row + d.y * i
+			if _is_valid(c, r) and board[c][r] == player: count += 1
+			else: break
+		for i in range(1, 4):
+			var c = col - d.x * i
+			var r = row - d.y * i
+			if _is_valid(c, r) and board[c][r] == player: count += 1
+			else: break
+		if count >= 4: return true
+	return false
+
+func _is_valid(c, r):
+	return c >= 0 and c < COLS and r >= 0 and r < ROWS
+
+func _end_game(winner):
+	game_over = true
+	var winner_name = "Red" if winner == 1 else "Yellow"
+	if Global.current_mode == Global.GameMode.PVE and winner == 2:
+		winner_name = "CPU"
+	
+	turn_label.text = winner_name + " Wins!"
+
+func _update_turn_label():
+	var p_name = "Red" if current_player == 1 else "Yellow"
+	if Global.current_mode == Global.GameMode.PVE:
+		if current_player == 1: p_name = "Player"
+		else: p_name = "CPU"
+		
+	turn_label.text = "Turn: " + p_name
+
+func _reset_game():
+	get_tree().reload_current_scene()
+
+func _on_back_pressed():
+	get_tree().change_scene_to_file("res://scenes/Menu.tscn")

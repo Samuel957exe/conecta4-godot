@@ -1,0 +1,74 @@
+[gd_scene load_steps=5 format=3 uid="uid://menuscene123"]
+
+[ext_resource type="Script" path="res://scripts/Menu.gd" id="1_menu"]
+[ext_resource type="Texture2D" path="res://assets/background.svg" id="2_bg"]
+[ext_resource type="FontFile" uid="uid://font123" path="res://assets/fonts/PressStart2P-Regular.ttf" id="3_font"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1"]
+font = ExtResource("3_font")
+font_size = 48
+font_color = Color(1, 0.84, 0, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_menu")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("2_bg")
+centered = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "CONECTA 4"
+label_settings = SubResource("LabelSettings_1")
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Btn1Player" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 16
+text = "1 JUGADOR"
+
+[node name="Btn2Players" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 16
+text = "2 JUGADORES"
+
+[node name="BtnSettings" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 16
+text = "AJUSTES"
+
+[node name="BtnQuit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 16
+text = "SALIR"

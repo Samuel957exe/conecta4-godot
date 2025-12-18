@@ -1,0 +1,54 @@
+<svg width="448" height="384" xmlns="http://www.w3.org/2000/svg">
+  <path fill="#2a3b90" fill-rule="evenodd" d="
+    M0,0 H448 V384 H0 Z
+    M12,12 v40 h40 v-40 z
+    M76,12 v40 h40 v-40 z
+    M140,12 v40 h40 v-40 z
+    M204,12 v40 h40 v-40 z
+    M268,12 v40 h40 v-40 z
+    M332,12 v40 h40 v-40 z
+    M396,12 v40 h40 v-40 z
+    
+    M12,76 v40 h40 v-40 z
+    M76,76 v40 h40 v-40 z
+    M140,76 v40 h40 v-40 z
+    M204,76 v40 h40 v-40 z
+    M268,76 v40 h40 v-40 z
+    M332,76 v40 h40 v-40 z
+    M396,76 v40 h40 v-40 z
+    
+    M12,140 v40 h40 v-40 z
+    M76,140 v40 h40 v-40 z
+    M140,140 v40 h40 v-40 z
+    M204,140 v40 h40 v-40 z
+    M268,140 v40 h40 v-40 z
+    M332,140 v40 h40 v-40 z
+    M396,140 v40 h40 v-40 z
+    
+    M12,204 v40 h40 v-40 z
+    M76,204 v40 h40 v-40 z
+    M140,204 v40 h40 v-40 z
+    M204,204 v40 h40 v-40 z
+    M268,204 v40 h40 v-40 z
+    M332,204 v40 h40 v-40 z
+    M396,204 v40 h40 v-40 z
+    
+    M12,268 v40 h40 v-40 z
+    M76,268 v40 h40 v-40 z
+    M140,268 v40 h40 v-40 z
+    M204,268 v40 h40 v-40 z
+    M268,268 v40 h40 v-40 z
+    M332,268 v40 h40 v-40 z
+    M396,268 v40 h40 v-40 z
+    
+    M12,332 v40 h40 v-40 z
+    M76,332 v40 h40 v-40 z
+    M140,332 v40 h40 v-40 z
+    M204,332 v40 h40 v-40 z
+    M268,332 v40 h40 v-40 z
+    M332,332 v40 h40 v-40 z
+    M396,332 v40 h40 v-40 z
+  "/>
+  <!-- Highlight/Bevel -->
+  <rect width="448" height="384" fill="none" stroke="#3b4cca" stroke-width="4" />
+</svg>
