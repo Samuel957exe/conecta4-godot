@@ -3,7 +3,7 @@ extends Node2D
 const ROWS = 6
 const COLS = 7
 const TILE_SIZE = 64
-const BOARD_OFFSET = Vector2(100, 100)
+var BOARD_OFFSET = Vector2(100, 100)
 
 var board = []
 var current_player = 1 # 1: Red (Player), 2: Yellow (CPU/Player 2)
@@ -19,8 +19,15 @@ var yellow_token_texture = preload("res://assets/token_yellow.svg")
 var pixel_font = preload("res://assets/fonts/PressStart2P-Regular.ttf")
 
 func _ready():
+	_center_board()
 	_init_board()
 	_update_turn_label()
+	
+	# Apply responsive background
+	# Assuming 'Background' node exists or we find it. 
+	# Wait, in Main.tscn the background node is named "Background".
+	if has_node("Background"):
+		Global.apply_background_to_scene($Background)
 	
 	# Apply font to UI
 	turn_label.add_theme_font_override("font", pixel_font)
@@ -28,11 +35,26 @@ func _ready():
 	
 	var back_btn = Button.new()
 	back_btn.text = "MENU"
-	back_btn.position = Vector2(550, 20)
+	back_btn.position = Vector2(20, 20) # Top left
 	back_btn.add_theme_font_override("font", pixel_font)
 	back_btn.add_theme_font_size_override("font_size", 16)
 	back_btn.pressed.connect(_on_back_pressed)
 	$UI.add_child(back_btn)
+
+func _center_board():
+	var screen_size = get_viewport_rect().size
+	var board_width = COLS * TILE_SIZE
+	var board_height = ROWS * TILE_SIZE
+	
+	BOARD_OFFSET.x = (screen_size.x - board_width) / 2
+	BOARD_OFFSET.y = (screen_size.y - board_height) / 2
+	
+	# Update BoardSprite position
+	board_sprite.position = BOARD_OFFSET
+	
+	# Update Turn Label position to be above board
+	turn_label.position.x = BOARD_OFFSET.x
+	turn_label.position.y = BOARD_OFFSET.y - 60
 
 func _init_board():
 	board = []

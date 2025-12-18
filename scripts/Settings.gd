@@ -5,6 +5,9 @@ extends Control
 @onready var btn_back = $Panel/VBoxContainer/BtnBack
 
 func _ready():
+	if has_node("Background"): # Note: Background node needs to be in Settings scene
+		Global.apply_background_to_scene($Background)
+		
 	btn_back.pressed.connect(_on_back_pressed)
 	volume_slider.value_changed.connect(_on_volume_changed)
 	mute_check.toggled.connect(_on_mute_toggled)

@@ -1,34 +1,43 @@
-<svg width="640" height="480" xmlns="http://www.w3.org/2000/svg">
+<svg width="720" height="1280" xmlns="http://www.w3.org/2000/svg">
   <!-- Sky -->
-  <rect width="640" height="480" fill="#87CEEB"/>
+  <rect width="720" height="1280" fill="#87CEEB"/>
   
   <!-- Sun -->
-  <path d="M500,40 H560 V100 H500 Z" fill="#FFD700" />
-  <rect x="510" y="50" width="40" height="40" fill="#FFFF00"/>
+  <path d="M560,100 H640 V180 H560 Z" fill="#FFD700" />
+  <rect x="580" y="120" width="40" height="40" fill="#FFFF00"/>
 
   <!-- Clouds -->
   <!-- Cloud 1 -->
   <g fill="#FFFFFF">
-    <rect x="50" y="80" width="80" height="30"/>
-    <rect x="70" y="60" width="50" height="30"/>
-    <rect x="90" y="90" width="60" height="20"/>
+    <rect x="50" y="160" width="80" height="30"/>
+    <rect x="70" y="140" width="50" height="30"/>
+    <rect x="90" y="170" width="60" height="20"/>
   </g>
   
   <!-- Cloud 2 -->
   <g fill="#FFFFFF">
-    <rect x="250" y="120" width="100" height="30"/>
-    <rect x="270" y="100" width="60" height="30"/>
+    <rect x="350" y="240" width="100" height="30"/>
+    <rect x="370" y="220" width="60" height="30"/>
+  </g>
+  
+  <!-- Cloud 3 (Lower) -->
+    <g fill="#FFFFFF">
+    <rect x="150" y="400" width="90" height="30"/>
+    <rect x="170" y="380" width="50" height="30"/>
   </g>
 
-  <!-- Hills/Grass -->
-  <path d="M0,350 L640,350 L640,480 L0,480 Z" fill="#4CAF50"/>
-  <rect x="0" y="360" width="640" height="20" fill="#66BB6a"/>
+  <!-- Hills/Grass (Tall for portrait) -->
+  <path d="M0,800 L720,800 L720,1280 L0,1280 Z" fill="#4CAF50"/>
+  <rect x="0" y="820" width="720" height="40" fill="#66BB6a"/>
   
   <!-- Trees/Details -->
-  <rect x="50" y="310" width="20" height="40" fill="#8D6E63"/>
-  <rect x="30" y="270" width="60" height="40" fill="#2E7D32"/>
+  <rect x="50" y="700" width="30" height="100" fill="#8D6E63"/>
+  <rect x="20" y="620" width="90" height="90" fill="#2E7D32"/>
   
-  <rect x="550" y="320" width="20" height="30" fill="#8D6E63"/>
-  <rect x="530" y="290" width="60" height="30" fill="#2E7D32"/>
+  <rect x="620" y="720" width="30" height="80" fill="#8D6E63"/>
+  <rect x="590" y="650" width="90" height="80" fill="#2E7D32"/>
+  
+  <rect x="150" y="900" width="20" height="40" fill="#388E3C"/>
+  <rect x="500" y="950" width="20" height="30" fill="#388E3C"/>
 
 </svg>

@@ -1,0 +1,32 @@
+<svg width="1280" height="720" xmlns="http://www.w3.org/2000/svg">
+  <!-- Sky -->
+  <rect width="1280" height="720" fill="#87CEEB"/>
+  
+  <!-- Sun -->
+  <path d="M1000,60 H1120 V180 H1000 Z" fill="#FFD700" />
+  <rect x="1020" y="80" width="80" height="80" fill="#FFFF00"/>
+
+  <!-- Clouds -->
+  <g fill="#FFFFFF">
+    <rect x="100" y="120" width="160" height="60"/>
+    <rect x="140" y="80" width="100" height="60"/>
+    <rect x="180" y="140" width="120" height="40"/>
+  </g>
+  
+  <g fill="#FFFFFF">
+    <rect x="500" y="180" width="200" height="60"/>
+    <rect x="540" y="140" width="120" height="60"/>
+  </g>
+
+  <!-- Hills/Grass -->
+  <path d="M0,500 L1280,500 L1280,720 L0,720 Z" fill="#4CAF50"/>
+  <rect x="0" y="520" width="1280" height="30" fill="#66BB6a"/>
+  
+  <!-- Trees -->
+  <rect x="100" y="460" width="40" height="80" fill="#8D6E63"/>
+  <rect x="60" y="380" width="120" height="80" fill="#2E7D32"/>
+  
+  <rect x="1100" y="480" width="40" height="60" fill="#8D6E63"/>
+  <rect x="1060" y="420" width="120" height="60" fill="#2E7D32"/>
+
+</svg>

@@ -1,6 +1,10 @@
 extends Control
 
 func _ready():
+	# Apply responsive background
+	if has_node("Background"):
+		Global.apply_background_to_scene($Background)
+
 	# Connect button signals
 	$VBoxContainer/Btn1Player.pressed.connect(_on_1_player_pressed)
 	$VBoxContainer/Btn2Players.pressed.connect(_on_2_players_pressed)
