@@ -52,9 +52,11 @@ func _center_board():
 	# Update BoardSprite position
 	board_sprite.position = BOARD_OFFSET
 	
-	# Update Turn Label position to be above board
+	# Update Turn Label position to be above board and centered
 	turn_label.position.x = BOARD_OFFSET.x
 	turn_label.position.y = BOARD_OFFSET.y - 60
+	turn_label.custom_minimum_size.x = COLS * TILE_SIZE
+	turn_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 
 func _init_board():
 	board = []
@@ -203,19 +205,23 @@ func _is_valid(c, r):
 
 func _end_game(winner):
 	game_over = true
-	var winner_name = "Red" if winner == 1 else "Yellow"
+	var winner_name = "ROJO" if winner == 1 else "AMARILLO"
 	if Global.current_mode == Global.GameMode.PVE and winner == 2:
 		winner_name = "CPU"
+	elif Global.current_mode == Global.GameMode.PVE and winner == 1:
+		winner_name = "JUGADOR"
 	
-	turn_label.text = winner_name + " Wins!"
+	turn_label.text = "¡" + winner_name + " GANA!"
+	turn_label.add_theme_font_size_override("font_size", 32)
+	turn_label.modulate = Color(0, 1, 0) # Make text green on win
 
 func _update_turn_label():
-	var p_name = "Red" if current_player == 1 else "Yellow"
+	var p_name = "ROJO" if current_player == 1 else "AMARILLO"
 	if Global.current_mode == Global.GameMode.PVE:
-		if current_player == 1: p_name = "Player"
+		if current_player == 1: p_name = "JUGADOR"
 		else: p_name = "CPU"
 		
-	turn_label.text = "Turn: " + p_name
+	turn_label.text = "Turno: " + p_name
 
 func _reset_game():
 	get_tree().reload_current_scene()

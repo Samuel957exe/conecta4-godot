@@ -3,6 +3,7 @@ extends Control
 @onready var volume_slider = $Panel/VBoxContainer/VolumeSlider
 @onready var mute_check = $Panel/VBoxContainer/MuteCheck
 @onready var btn_back = $Panel/VBoxContainer/BtnBack
+@onready var fullscreen_check = $Panel/VBoxContainer/FullscreenCheck
 
 func _ready():
 	if has_node("Background"): # Note: Background node needs to be in Settings scene
@@ -16,11 +17,23 @@ func _ready():
 	mute_check.button_pressed = AudioManager.is_muted
 	volume_slider.value = db_to_linear(AudioManager.current_volume_db)
 
+	if OS.has_feature("pc"):
+		fullscreen_check.toggled.connect(_on_fullscreen_toggled)
+		fullscreen_check.button_pressed = DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
+	else:
+		fullscreen_check.visible = false
+
 func _on_volume_changed(value):
 	AudioManager.set_volume(value)
 
 func _on_mute_toggled(toggled):
 	AudioManager.set_mute(toggled)
+
+func _on_fullscreen_toggled(toggled):
+	if toggled:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
 func _on_back_pressed():
 	get_tree().change_scene_to_file("res://scenes/Menu.tscn")

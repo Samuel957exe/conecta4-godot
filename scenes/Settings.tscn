@@ -79,6 +79,13 @@ theme_override_font_sizes/font_size = 12
 text = "SILENCIAR"
 alignment = 1
 
+[node name="FullscreenCheck" type="CheckBox" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 12
+text = "PANTALLA COMPLETA"
+alignment = 1
+
 [node name="Spacer" type="Control" parent="Panel/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
