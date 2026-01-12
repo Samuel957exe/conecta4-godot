@@ -75,6 +75,13 @@ func _center_grid() -> void:
 		turn_label.position = Vector2(pos.x, pos.y - 60)
 		turn_label.custom_minimum_size.x = board_size.x
 		turn_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		
+		# Añadir contorno/sombra para asegurar legibilidad sobre nubes blancas
+		turn_label.add_theme_color_override("font_outline_color", Color.BLACK)
+		turn_label.add_theme_constant_override("outline_size", 8)
+		turn_label.add_theme_color_override("font_shadow_color", Color(0,0,0,0.5))
+		turn_label.add_theme_constant_override("shadow_offset_x", 3)
+		turn_label.add_theme_constant_override("shadow_offset_y", 3)
 
 func _input(event: InputEvent) -> void:
 	# Si el juego terminó, cualquier clic reinicia

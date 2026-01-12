@@ -1,10 +1,9 @@
 72322a848ab928aa5c89f0cb78209805
-::res://::1768207631
+::res://::1768209390
 export_presets.cfg::TextFile::-1::1768205808::0::1::::<><><>0<>0<><>::
 icon.svg::CompressedTexture2D::8864093461683792804::1768204244::1768204305::1::::<><><>0<>0<>c98e386362c82508e5cbae895f2251d9<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 README.md::TextFile::-1::1768204244::0::1::::<><><>0<>0<><>::
-::res://android/::1768205891
-::res://assets/::1768204305
+::res://assets/::1768209256
 background.svg::CompressedTexture2D::7793520006874896492::1768204244::1768204305::1::::<><><>0<>0<>c42e2db393606f6f84d7fe0893c342a6<>res://.godot/imported/background.svg-ef40ca42a4262420673651b4c6a8a059.ctex::
 background_landscape.svg::CompressedTexture2D::4863197949429566881::1768204244::1768204305::1::::<><><>0<>0<>1b4a730c1c7bbce475de9534afa0463d<>res://.godot/imported/background_landscape.svg-ed4e672afc33145a8e7b3e9d571177e2.ctex::
 board.svg::CompressedTexture2D::8705199398152302726::1768204244::1768204305::1::::<><><>0<>0<>29ed8710d5bafd17d3a4de03cc888c98<>res://.godot/imported/board.svg-fe2c6dd23cbd739e76a2f264a1287864.ctex::
@@ -20,7 +19,7 @@ Menu.tscn::PackedScene::851349620165903370::1768204244::0::1::::<><><>0<>0<><>::
 Settings.tscn::PackedScene::1580754186074728458::1768204244::0::1::::<><><>0<>0<><>::res://scripts/Settings.gd<>res://assets/background.svg<>uid://font123::::res://assets/fonts/PressStart2P-Regular.ttf
 ::res://scripts/::1768204244
 AudioManager.gd::GDScript::7051549441202999560::1768207079::0::1::::<>Node<><>0<>0<><>::
-Game.gd::GDScript::2697655073097954502::1768207060::0::1::::<>Node2D<><>0<>0<><>::
+Game.gd::GDScript::2697655073097954502::1768209358::0::1::::<>Node2D<><>0<>0<><>::
 Global.gd::GDScript::7395796993066835543::1768207067::0::1::::<>Node<><>0<>0<><>::
 Menu.gd::GDScript::8311459866394688593::1768207077::0::1::::<>Control<><>0<>0<><>::
 Settings.gd::GDScript::7412587833928339833::1768207436::0::1::::<>Control<><>0<>0<><>::

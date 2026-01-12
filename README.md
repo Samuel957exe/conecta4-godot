@@ -36,7 +36,7 @@ Una implementación retro y pixel art del clásico juego Conecta 4, creado con G
 ## 🎨 Créditos de Recursos
 
 *   **Fuente**: "Press Start 2P" de CodeMan38 (Google Fonts).
-*   **Gráficos**: Pixel art personalizado por Antigravity (Google DeepMind).
+*   **Gráficos**: Pixel art personalizado.
 *   **Audio**: Pistas de marcador de posición (Personalizable por el usuario).
 
 ## 📄 Licencia
