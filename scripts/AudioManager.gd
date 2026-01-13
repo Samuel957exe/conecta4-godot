@@ -14,9 +14,8 @@ func _ready():
 	_setup_audio()
 	play_music()
 	
-	# Cargar sonido de golpe si existe
-	if FileAccess.file_exists("res://assets/hit.wav"):
-		hit_sound = load("res://assets/hit.wav")
+	# Cargar sonido de golpe (siempre debe existir)
+	hit_sound = load("res://assets/hit.wav")
 
 func _setup_audio():
 	# Crear nodos de audio dinámicamente y añadirlos a la escena global
@@ -26,15 +25,9 @@ func _setup_audio():
 	sfx_player = AudioStreamPlayer.new()
 	add_child(sfx_player)
 	
-	# Intentar cargar música de fondo (ogg o mp3)
-	if FileAccess.file_exists("res://assets/music.ogg"):
-		var stream = load("res://assets/music.ogg")
-		stream.loop = true
-		music_player.stream = stream
-	elif FileAccess.file_exists("res://assets/music.mp3"):
-		var stream = load("res://assets/music.mp3")
-		stream.loop = true
-		music_player.stream = stream
+	# Cargar música de fondo
+	var stream = load("res://assets/music.mp3")
+	music_player.stream = stream
 
 # Reproducir música en bucle
 func play_music():
